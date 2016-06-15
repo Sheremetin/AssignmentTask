@@ -9,7 +9,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head 
          content must come *after* these tags -->
     
-    <title>Ristorante Con Fusion</title>    
+    <title>Ristorante Con Fusion</title>
         <!-- Bootstrap -->
 <!-- build:css styles/main.css -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
     <link href="styles/bootstrap-social.css" rel="stylesheet">
     <link href="styles/mystyles.css" rel="stylesheet">
 <!-- endbuild -->
-    <!--<base href="/contactus" />-->
+    <base href="/ConFusion/Angular/conFusion/app/" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -38,21 +38,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#/"><img src="images/logo.png" height=30 width=41></a>
+                <a class="navbar-brand" href="/"><img src="images/logo.png" height=30 width=41></a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/contactus">
+                    <li class="active"><a href="/contactus">
                         <span class="glyphicon glyphicon-home"
                          aria-hidden="true"></span> Home</a></li>
-                    <li><a href="#/aboutus">
+                    <li><a href="/aboutus">
                         <span class="glyphicon glyphicon-info-sign"
                          aria-hidden="true"></span> About</a></li>
-                    <li><a href="#/menu">
+                    <li><a href="/menu">
                          <span class="glyphicon glyphicon-list-alt"
                          aria-hidden="true"></span> 
                          Menu</a></li>
-                     <li><a href="#/contactus">
+                     <li><a href="/contactus">
                      <i class="fa fa-envelope-o"></i> Contact</a></li>
                 </ul>
             </div>
@@ -61,7 +61,7 @@
                
     <header class="jumbotron">
 
-        &lt;!&ndash; Main component for a primary marketing message or call to action &ndash;&gt;
+        <!-- Main component for a primary marketing message or call to action -->
 
         <div class="container">
             <div class="row row-header">
@@ -80,31 +80,21 @@
                 </div>
             </div>
         </div>
-    </header>-->
+    </header>
 
-    <div ui-view="header"></div>
-    <div ui-view="content"></div>
-    <div ui-view="footer"></div>
-
-    <!--<ng-view></ng-view>-->
+    <ng-view></ng-view>
     
-    <!--<footer class="row-footer">
+    <footer class="row-footer">
         <div class="container">
             <div class="row">             
                 <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
                     <h5>Links</h5>
                     <ul class="list-unstyled">
-                        <li><a ui-sref="app">Home</a></li>
-                        <li><a ui-sref="app.aboutus">About</a></li>
-                        <li><a ui-sref="app.menu">Menu</a></li>
-                        <li><a ui-sref="app.contactus">Contact</a></li>
-                    </ul>
-                    &lt;!&ndash;<ul class="list-unstyled">
                         <li><a href="#">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Menu</a></li>
                         <li><a href="#">Contact</a></li>
-                    </ul>&ndash;&gt;
+                    </ul>
                 </div>
                 <div class="col-xs-6 col-sm-5">
                     <h5>Our Address</h5>
@@ -135,11 +125,10 @@
                 </div>
             </div>
         </div>
-    </footer>-->
+    </footer>
 
 <!-- build:js scripts/main.js -->
     <script src="../bower_components/angular/angular.min.js"></script>
-    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers.js"></script>

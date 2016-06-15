@@ -59,7 +59,7 @@ angular.module('confusionApp')
         };
     }])
 
-    .controller('dishDetailController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
+    /*.controller('dishDetailController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
         var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
         $scope.dish = dish;
 
@@ -70,9 +70,9 @@ angular.module('confusionApp')
         $scope.sorting = sorting;
 
         $scope.dish = menuFactory.getDish(3);
-    }])
+    }])*/
 
-    /*.controller('dishDetailController', ['$scope', '$routeParams', 'menuFactory', function ($scope, $routeParams,  menuFactory) {
+    .controller('dishDetailController', ['$scope', '$routeParams', 'menuFactory', function ($scope, $routeParams,  menuFactory) {
 
         var sorting = [{value: "rating", label: "rating"},
             {value: "-rating", label: "-rating"},
@@ -84,7 +84,7 @@ angular.module('confusionApp')
         $scope.dish = dish;
 
 
-        //$scope.dish = menuFactory.getDish(3);
+        $scope.dish = menuFactory.getDish(3);
 
         //$scope.dish = {
         //    name: 'Uthapizza',
@@ -127,7 +127,7 @@ angular.module('confusionApp')
         //
         //    ]
         //};
-    }])*/
+    }])
 
     .controller('DishCommentController', ['$scope', function ($scope) {
 
