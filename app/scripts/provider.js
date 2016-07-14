@@ -21,6 +21,8 @@ angular.module('confusionApp')
             })
             .otherwise('/menu');
 
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode({
+            enabled: true
+        });
     })
 ;
