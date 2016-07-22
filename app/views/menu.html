@@ -1,6 +1,18 @@
 <div class="container">
-    <div class="row row-content" ng-controller="menuController as menuCtrl">
-        <div class="col-xs-12">
+    <div ng-controller="MenuController as menuCtrl">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Menu</li>
+                </ul>
+            </div>
+            <div class="col-xs-12">
+                <h3>Menu</h3>
+                <hr>
+            </div>
+        </div>
+        <div class="col-xs-12 row row-content">
             <button ng-click="toggleDetails()" class="btn btn-xs btn-primary pull-right">
                 {{showDetails ? 'Hide Details':'Show Details'}}
             </button>
