@@ -7,10 +7,18 @@ angular.module('confusionApp')
         $scope.tab = 1;
         $scope.filtText = '';
         $scope.showDetails = false;
-        $scope.showMenu = true;
+        $scope.showMenu = false;
         $scope.message = "Loading ...";
 
-        $scope.dishes = menuFactory.getDishes().query();
+        $scope.dishes = menuFactory.getDishes().query(
+            function(response) {
+                $scope.dishes = response;
+                $scope.showMenu = true;
+            },
+            function(response) {
+                $scope.message = "Error: " + response.status + " " + response.statusText;
+            }
+        );
 
         $scope.select = function (setTab) {
             $scope.tab = setTab;
@@ -49,11 +57,12 @@ angular.module('confusionApp')
 
     }])
 
-    .controller('FeedbackController', ['$scope', function ($scope) {
+    .controller('FeedbackController', ['$scope', 'feedbackFactory', function ($scope, feedbackFactory) {
 
         $scope.sendFeedback = function () {
 
             console.log($scope.feedback);
+            feedbackFactory.getFeedback().save({id: $scope.feedback.id}, $scope.feedback);
 
             if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
                 $scope.invalidChannelSelection = true;
@@ -64,38 +73,28 @@ angular.module('confusionApp')
                 $scope.feedback = {mychannel: "", firstName: "", lastName: "", agree: false, email: ""};
                 $scope.feedback.mychannel = "";
                 $scope.feedbackForm.$setPristine();
-                console.log($scope.feedback);
             }
         };
     }])
 
     .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function ($scope, $stateParams, menuFactory) {
 
-        $scope.showDish = true;
+        $scope.showDish = false;
         $scope.message = "Loading ...";
 
-        $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id, 10)});
-
+        $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id, 10)})
+            .$promise.then(
+                function (response) {
+                    $scope.dish = response;
+                    $scope.showDish = true;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
     }])
 
-    //.controller('DishCommentController', ['$scope', function ($scope) {
-    //
-    //    $scope.mycomment = {rating: 5, comment: "", author: "", date: ""};
-    //
-    //    $scope.submitComment = function () {
-    //
-    //        $scope.mycomment.date = new Date().toISOString();
-    //        console.log($scope.mycomment);
-    //
-    //        $scope.dish.comments.push($scope.mycomment);
-    //
-    //        $scope.commentForm.$setPristine();
-    //
-    //        $scope.mycomment = {rating: 5, comment: "", author: "", date: ""};
-    //    }
-    //}])
-
-    .controller('DishCommentController', ['$scope', function ($scope) {
+    .controller('DishCommentController', ['$scope', 'menuFactory', function ($scope, menuFactory) {
 
         $scope.feedback = {
             rating: "5",
@@ -106,11 +105,11 @@ angular.module('confusionApp')
 
         $scope.submitComment = function () {
 
-            console.log($scope.feedback);
-
             $scope.feedback.date = new Date().toISOString();
 
             $scope.dish.comments.push($scope.feedback);
+
+            menuFactory.getDishes().update({id: $scope.dish.id}, $scope.dish);
 
             $scope.feedback = {
                 rating: "",
@@ -126,21 +125,66 @@ angular.module('confusionApp')
 
     .controller('AboutController', ['$scope', 'corporateFactory', function ($scope, corporateFactory) {
 
-        $scope.leadership = corporateFactory.getLeaders();
+        $scope.showLeader = false;
+        $scope.message = "Loading ...";
 
+        $scope.leadership = corporateFactory.getLeadership().query(
+            function (response) {
+                $scope.leadership = response;
+                $scope.showLeader = true;
+                console.log($scope.Leadership);
+            },
+            function (response) {
+                $scope.message = "Error: " + response.status + " " + response.statusText;
+            }
+        );
     }])
 
     .controller('IndexController', ['$scope', '$stateParams', 'menuFactory', 'corporateFactory', function ($scope, $stateParams, menuFactory, corporateFactory) {
 
-        $scope.leader = corporateFactory.getLeader(3);
-
-        $scope.promotion = menuFactory.getPromotion(0);
-
-        $scope.showDish = true;
+        $scope.showLeader = false;
         $scope.message = "Loading ...";
 
-        $scope.dish = menuFactory.getDishes().get({id:0});
+        $scope.leaders = corporateFactory.getLeadership().get({id: 0})
+            .$promise.then(
+                function (response) {
+                    $scope.leaders = response;
+                    $scope.showLeader = true;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
 
+        $scope.showPromo = false;
+        $scope.message = "Loading ...";
+
+        $scope.promotion = menuFactory.getPromotions().get({id: 0})
+            .$promise.then(
+                function (response) {
+                    $scope.promotion = response;
+                    $scope.showPromo = true;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
+
+        $scope.showDish = false;
+        $scope.message = "Loading ...";
+
+        $scope.dish = menuFactory.getDishes().get({id:3})
+            .$promise.then(
+                function (response) {
+                    $scope.dish = response;
+                    $scope.showDish = true;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
     }])
 ;
+
+
 

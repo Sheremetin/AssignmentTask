@@ -58,20 +58,23 @@
     <div class="row row-content">
         <div class="col-xs-12 col-sm-9">
             <h2>Corporate Leadership</h2>
-            <ul class="media-list tab-pane fade in active">
+            <div class="col-xs-12" ng-if="!showLeader">
+                <h3>{{message}}</h3>
+            </div>
+            <ul class="media-list tab-pane fade in active" ng-if="showLeader">
                 <li class="media"
-                    ng-repeat="leader in leadership">
+                    ng-repeat="leaders in leadership">
                     <div class="media-left media-middle">
                         <a>
                             <img class="media-object img-thumbnail"
-                                 ng-src={{leader.image}} alt="LeaderName">
+                                 ng-src={{leaders.image}} alt="LeaderName">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h2 class="media-heading">{{leader.name}}
-                            <small>{{leader.designation}}</small>
+                        <h2 class="media-heading">{{leaders.name}}
+                            <small>{{leaders.designation}}</small>
                         </h2>
-                        <p>{{leader.description}}</p>
+                        <p>{{leaders.description}}</p>
                     </div>
                 </li>
             </ul>
@@ -167,3 +170,6 @@
         </div>
     </div>
 </div>
+
+
+
